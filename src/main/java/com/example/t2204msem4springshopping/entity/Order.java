@@ -27,9 +27,6 @@ public class Order {
     @Column(name = "shipping_address", nullable = false)
     private String shippingAddress;
 
-    @Column(name = "payment_status", nullable = false)
-    private String paymentStatus;
-
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
@@ -39,12 +36,11 @@ public class Order {
     public Order() {
     }
 
-    public Order(User user, double total, String status, String shippingAddress, String paymentStatus, LocalDateTime createdAt) {
+    public Order(User user, double total, String status, String shippingAddress, LocalDateTime createdAt) {
         this.user = user;
         this.total = total;
         this.status = status;
         this.shippingAddress = shippingAddress;
-        this.paymentStatus = paymentStatus;
         this.createdAt = createdAt;
     }
 
@@ -88,13 +84,6 @@ public class Order {
         this.shippingAddress = shippingAddress;
     }
 
-    public String getPaymentStatus() {
-        return paymentStatus;
-    }
-
-    public void setPaymentStatus(String paymentStatus) {
-        this.paymentStatus = paymentStatus;
-    }
 
     public LocalDateTime getCreatedAt() {
         return createdAt;
