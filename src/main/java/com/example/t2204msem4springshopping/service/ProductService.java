@@ -40,6 +40,7 @@ public class ProductService implements IProductService{
                 .orElseThrow(() -> new NoSuchElementException("Category not found"));
         System.out.println(category);
         Product product = modelMapper.map(productCreateDTO, Product.class);
+        System.out.println(product.getId());
         product.setCategory(category);
         Product createdProduct = productRepository.save(product);
         return modelMapper.map(createdProduct, ProductDTO.class);

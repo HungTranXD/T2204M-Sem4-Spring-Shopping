@@ -7,11 +7,11 @@ public class ProductCreateDTO {
     @Size(max = 225, message = "Name must be lest than 255 characters")
     private String name;
 
-//    @NotBlank(message = "Price is mandatory")
+    @NotNull(message = "Price is mandatory")
     @DecimalMin(value = "0", message = "Price must be greater than or equal to 0")
     private double price;
 
-//    @NotBlank(message = "Quantity is mandatory")
+    @NotNull(message = "Quantity is mandatory")
     @Min(value = 0, message = "Quantity must be greater than or equal to 0")
     private int quantity;
 

@@ -21,8 +21,8 @@ public class AppConfig {
     public ModelMapper modelMapper() {
         ModelMapper modelMapper = new ModelMapper();
 
-//        modelMapper.createTypeMap(ProductCreateDTO.class, Product.class)
-//                .addMappings(mapper -> mapper.skip(Product::setCategory));
+        modelMapper.createTypeMap(ProductCreateDTO.class, Product.class)
+                .addMappings(mapper -> mapper.skip(Product::setId));
 
         return modelMapper;
     }

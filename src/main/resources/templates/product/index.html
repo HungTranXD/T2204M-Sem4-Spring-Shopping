@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+<head>
+    <meta charset="UTF-8">
+    <title>Product list</title>
+</head>
+<body>
+
+<div class="container">
+    <h1 class="display-3">This is a list of products</h1>
+    <a th:href="@{/product/create}" type="button" class="btn btn-primary">Add new product</a>
+<!--    <h2 style="color: green">The total number of product is <span style="color: red" th:text="${students.length}"></span></h2>-->
+    <table class="table table-hover mt-3">
+        <thead>
+            <tr class="table-primary">
+                <th scope="col">No</th>
+                <th scope="col">Name</th>
+                <th scope="col">Price</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Category</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+        <tr th:each="product: ${products}">
+            <td th:text="${product.id}"/>
+            <td th:text="${product.name}"/>
+            <td th:text="${product.price}"/>
+            <td>
+                <span th:if="${product.quantity} == 0">Out of stock</span>
+                <span th:if="${product.quantity} > 0">In stock</span>
+            </td>
+            <td th:text="${product.category.name}"/>
+            <td>
+                <button class="btn btn-warning">Edit</button>
+                <button class="btn btn-danger">Delete</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <!--<form action="#" th:action="@{/saveStudent}" th:object="${student}" method="post">-->
+    <!--    <table>-->
+    <!--        <tr>-->
+    <!--            <td><label>ID:</label></td>-->
+    <!--            <td><input type="number" th:field="*{id}"></td>-->
+    <!--        </tr>-->
+    <!--        <tr>-->
+    <!--            <td><label>Name:</label></td>-->
+    <!--            <td><input type="text" th:field="*{name}"></td>-->
+    <!--        </tr>-->
+    <!--        <tr>-->
+    <!--            <td><label>Gender:</label></td>-->
+    <!--            <td><input type="text" th:field="*{gender}"></td>-->
+    <!--        </tr>-->
+    <!--    </table>-->
+    <!--</form>-->
+</div>
+</body>
+</html>
