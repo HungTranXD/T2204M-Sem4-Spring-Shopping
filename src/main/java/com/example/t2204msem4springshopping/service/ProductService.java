@@ -2,6 +2,7 @@ package com.example.t2204msem4springshopping.service;
 
 import com.example.t2204msem4springshopping.dto.ProductCreateDTO;
 import com.example.t2204msem4springshopping.dto.ProductDTO;
+import com.example.t2204msem4springshopping.dto.ProductEditDTO;
 import com.example.t2204msem4springshopping.entity.Category;
 import com.example.t2204msem4springshopping.entity.Product;
 import com.example.t2204msem4springshopping.repository.CategoryRepository;
@@ -56,11 +57,19 @@ public class ProductService implements IProductService{
 
     @Override
     public Optional<ProductDTO> getProductById(Long id) {
-        return Optional.empty();
+        return productRepository.findById(id)
+                .map(product -> modelMapper.map(product, ProductDTO.class));
+    }
+
+    @Override
+    public ProductDTO updateProduct(ProductEditDTO productEditDTO) {
+        Product product = modelMapper.map(productEditDTO, Product.class);
+        Product updatedProduct = productRepository.save(product);
+        return modelMapper.map(updatedProduct, ProductDTO.class);
     }
 
     @Override
     public void deleteProduct(Long id) {
-
+        productRepository.deleteById(id);
     }
 }
