@@ -22,7 +22,7 @@
     Current Session ID is <span th:text="${sessionId}" />
 </div>
 <div>
-    <form th:action="@{/destroy}" method="post">
+    <form th:action="@{/session/destroy}" method="post">
         <input type="submit" value="Destroy Session" />
     </form>
 </div>

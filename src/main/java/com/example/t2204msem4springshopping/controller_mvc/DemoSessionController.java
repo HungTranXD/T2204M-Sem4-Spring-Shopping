@@ -31,21 +31,21 @@ public class DemoSessionController {
     }
 
     @PostMapping("/persistMessage")
-    public String persistMessage(@RequestParam("msg") String msg, HttpServletRequest request) {
+    public String persistMessage(@RequestParam("msg") String msg, HttpSession session) {
         @SuppressWarnings("unchecked")
-        List<String> msgs = (List<String>) request.getSession().getAttribute("MY_SESSION_MESSAGES");
+        List<String> msgs = (List<String>) session.getAttribute("MY_SESSION_MESSAGES");
         if (msgs == null) {
             msgs = new ArrayList<>();
-            request.getSession().setAttribute("MY_SESSION_MESSAGES", msgs);
+            session.setAttribute("MY_SESSION_MESSAGES", msgs);
         }
         msgs.add(msg);
-        request.getSession().setAttribute("MY_SESSION_MESSAGES", msgs);
+        session.setAttribute("MY_SESSION_MESSAGES", msgs);
         return "redirect:/session";
     }
 
     @PostMapping("/destroy")
-    public String destroySession(HttpServletRequest request) {
-        request.getSession().invalidate();
-        return "redirect:/";
+    public String destroySession(HttpSession session) {
+        session.invalidate();
+        return "redirect:/product/list";
     }
 }
