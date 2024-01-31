@@ -56,9 +56,14 @@ public class ProductControllerMVC {
     }
 
     @PostMapping("/create")
-    public String submitCreateProduct(@ModelAttribute("product") @Valid ProductCreateDTO product, BindingResult bindingResult) {
+    public String submitCreateProduct(
+            @ModelAttribute("product") @Valid ProductCreateDTO product,
+            BindingResult bindingResult,
+            Model model
+    ) {
         if (bindingResult.hasErrors()) {
-            System.out.println(product);
+            List<CategoryDTO> categories = categoryService.getAllCategories();
+            model.addAttribute("categories", categories);
             return "product/create";
         }
         productService.createProduct(product);
