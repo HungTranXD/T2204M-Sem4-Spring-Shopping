@@ -60,6 +60,20 @@
         </tbody>
     </table>
 
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            <li class="page-item" th:if="${currentPage} > 0">
+                <a class="page-link" th:href="@{/product/list(page=${currentPage - 1}, size=${size})}">Previous</a>
+            </li>
+            <li class="page-item" th:each="i : ${#numbers.sequence(0, totalPages - 1)}" th:classappend="${currentPage == i} ? 'active' : ''">
+                <a class="page-link" th:href="@{/product/list(page=${i}, size=${size})}" th:text="${i + 1}"></a>
+            </li>
+            <li class="page-item" th:if="${currentPage} < ${totalPages} - 1">
+                <a class="page-link" th:href="@{/product/list(page=${currentPage + 1}, size=${size})}">Next</a>
+            </li>
+        </ul>
+    </nav>
+
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">

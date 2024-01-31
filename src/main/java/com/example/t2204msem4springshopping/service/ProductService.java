@@ -7,9 +7,14 @@ import com.example.t2204msem4springshopping.entity.Category;
 import com.example.t2204msem4springshopping.entity.Product;
 import com.example.t2204msem4springshopping.repository.CategoryRepository;
 import com.example.t2204msem4springshopping.repository.ProductRepository;
+import jakarta.transaction.Transactional;
 import org.hibernate.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -36,6 +41,7 @@ public class ProductService implements IProductService{
     }
 
     @Override
+    @Transactional
     public ProductDTO createProduct(ProductCreateDTO productCreateDTO) {
         Category category = categoryRepository.findById(productCreateDTO.getCategoryId())
                 .orElseThrow(() -> new NoSuchElementException("Category not found"));
@@ -48,11 +54,15 @@ public class ProductService implements IProductService{
     }
 
     @Override
-    public List<ProductDTO> getAllProducts() {
-        return productRepository.findAll()
-                .stream()
-                .map(product -> modelMapper.map(product, ProductDTO.class))
-                .collect(Collectors.toList());
+    public Page<ProductDTO> getAllProducts(String search, String sort, Pageable pageable) {
+        Page<Product> products;
+
+        if (search != null && !search.isEmpty()) {
+            products = productRepository.findByNameContainingIgnoreCase(search, pageable);
+        } else {
+            products = productRepository.findAll(pageable);
+        }
+        return products.map(product -> modelMapper.map(product, ProductDTO.class));
     }
 
     @Override
