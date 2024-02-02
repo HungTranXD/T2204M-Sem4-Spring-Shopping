@@ -14,4 +14,5 @@ public class HomeController {
         model.addAttribute("user", principal);
         return "index";
     }
+
 }
