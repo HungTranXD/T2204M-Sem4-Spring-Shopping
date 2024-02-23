@@ -95,7 +95,7 @@ public class ProductControllerMVC {
     }
 
     @PostMapping("/edit")
-    public String submitUpdateProduct(
+    public String submitUpdateProduct (
             @ModelAttribute("product") @Valid ProductEditDTO product,
             BindingResult bindingResult
     ) {

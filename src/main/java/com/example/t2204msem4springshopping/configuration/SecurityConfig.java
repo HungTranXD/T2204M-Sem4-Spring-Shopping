@@ -1,6 +1,7 @@
 package com.example.t2204msem4springshopping.configuration;
 
 
+import com.example.t2204msem4springshopping.entity.CustomUserDetail;
 import com.example.t2204msem4springshopping.service.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -44,8 +45,9 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authenticationProvider(authenticationProvider());
 
-        http.authorizeHttpRequests((authorize) -> authorize
+        http.authorizeHttpRequests(authorize -> authorize
                     .requestMatchers("/users").authenticated()
+                    .requestMatchers("/product/create").hasAnyAuthority("USER", "ADMIN")
                     .anyRequest().permitAll()
             )
             .httpBasic(Customizer.withDefaults())
