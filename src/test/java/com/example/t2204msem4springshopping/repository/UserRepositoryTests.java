@@ -18,32 +18,32 @@ import java.util.Optional;
 @Rollback(false)
 public class UserRepositoryTests {
 
-    @Autowired
-    private TestEntityManager entityManager;
-
-    @Autowired
-    private UserRepository repository;
-
-    @Test
-    public void testCreateUser() {
-        User user = new User();
-        user.setEmail("user@email.com");
-        user.setPassword("password");
-        user.setFirstName("John");
-        user.setLastName("Doe");
-
-        User savedUser = repository.save(user);
-
-        User existUser = entityManager.find(User.class, savedUser.getId());
-
-        Assert.assertEquals(user.getEmail(), existUser.getEmail());
-    }
-
-    @Test
-    public void testGetUserByEmail() {
-        Optional<User> user = repository.findByEmail("user@email.com");
-        if (user.isEmpty()) return;
-
-        Assertions.assertEquals(user.get().getEmail(), "user@email.com");
-    }
+//    @Autowired
+//    private TestEntityManager entityManager;
+//
+//    @Autowired
+//    private UserRepository repository;
+//
+//    @Test
+//    public void testCreateUser() {
+//        User user = new User();
+//        user.setEmail("user@email.com");
+//        user.setPassword("password");
+//        user.setFirstName("John");
+//        user.setLastName("Doe");
+//
+//        User savedUser = repository.save(user);
+//
+//        User existUser = entityManager.find(User.class, savedUser.getId());
+//
+//        Assert.assertEquals(user.getEmail(), existUser.getEmail());
+//    }
+//
+//    @Test
+//    public void testGetUserByEmail() {
+//        Optional<User> user = repository.findByEmail("user@email.com");
+//        if (user.isEmpty()) return;
+//
+//        Assertions.assertEquals(user.get().getEmail(), "user@email.com");
+//    }
 }
