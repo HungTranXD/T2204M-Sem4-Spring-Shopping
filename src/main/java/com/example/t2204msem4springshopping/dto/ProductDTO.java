@@ -1,7 +1,13 @@
 package com.example.t2204msem4springshopping.dto;
 
 import com.example.t2204msem4springshopping.entity.Category;
+import lombok.*;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class ProductDTO {
 
     private Long id;
